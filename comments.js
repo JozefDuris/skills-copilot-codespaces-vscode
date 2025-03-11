@@ -1,15 +1,4 @@
 //create web server
-//create an express app
-//create a router
-//create a route handler
-//listen on a port
-//create a form in the browser
-//submit the form
-//send the form data to the server
-//save the form data in a file
-//read the form data from the file
-//display the form data in the browser
-
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');

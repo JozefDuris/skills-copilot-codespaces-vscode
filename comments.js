@@ -1,34 +1,15 @@
-//create web server
-const express = require('express');
-const fs = require('fs');
-const bodyParser = require('body-parser');
-const path = require('path');
+//Create web server
+var express = require('express');
+var app = express();
 
-const app = express();
-const router = express.Router();
+app.use(express.static('public'));
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-const comments = [];
-
-router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+//Create route
+app.get('/comments', function (req, res) {
+  res.send('Hello, World!');
 });
 
-router.post('/comments', (req, res) => {
-  comments.push(req.body.comment);
-  fs.writeFileSync('comments.json', JSON.stringify(comments));
-  res.redirect('/comments');
-});
-
-router.get('/comments', (req, res) => {
-  const comments = JSON.parse(fs.readFileSync('comments.json'));
-  res.send(comments.map((comment, index) => `<p>${index + 1}: ${comment}</p>`).join(''));
-});
-
-app.use('/', router);
-
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+//Start server
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
 });
